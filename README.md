@@ -3,7 +3,7 @@
 See also See also [tlcs-c](https://github.com/aragonzkresearch/tlcs-c/), [Timelock.zone.AndroidExample](https://github.com/vincenzoiovino/Timelock.zone.AndroidExample) and [TLCS Usage](https://github.com/aragonzkresearch/tlcs-c/blob/main/examples/howtoencrypt.md).
 ## Installation
 ### Install from source
-Compile the source code to a Java runnable Jar file named `timelock.fs.jar` in the `bin` folder or in any folder: the only requirement is that the file `install.bat` must reside in the same folder as the runnable Jar you created.
+Use `Java` tools or any IDE to build from the source code a runnable Jar file named `timelock.fs.jar` and stores it in the `bin` folder or in any other folder: the only requirement is that the file `install.bat` must reside in the same folder as the runnable Jar you created.
 Then follow the same steps as for the installation without compilation.
 
 ### Install without compilation
