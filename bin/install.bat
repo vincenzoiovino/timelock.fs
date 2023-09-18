@@ -25,7 +25,7 @@ echo Installation terminated.
 echo If you cannot find the timelock.fs extensions you must edit in this install.bat file the line:
 echo setx YOUR_JAVA "C:\Program Files\Java\jdk-16.0.1"
 echo and change it to:
-echo setx YOUR_JAVA Path
+echo setx YOUR_JAVA "Path"
 echo where Path is a path to your Java Runtime Environment (JRE) installation.
 echo If you do not have JRE you can download it from here: https://www.oracle.com/java/technologies/downloads/
 echo You can close this window.
