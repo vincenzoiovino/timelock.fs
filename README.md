@@ -3,7 +3,7 @@
 See also See also [tlcs-c](https://github.com/aragonzkresearch/tlcs-c/), [Timelock.zone.AndroidExample](https://github.com/vincenzoiovino/Timelock.zone.AndroidExample) and [TLCS Usage](https://github.com/aragonzkresearch/tlcs-c/blob/main/examples/howtoencrypt.md).
 ## Installation
 ### Install from source
-Compile the source code to a Java runnable Jar file named `timeloc.fs.jar` in the `bin` folder or in any folder: the only requirement is that the file `install.bat` stays in the same folder as the runnable Jar you created.
+Compile the source code to a Java runnable Jar file named `timelock.fs.jar` in the `bin` folder or in any folder: the only requirement is that the file `install.bat` must reside in the same folder as the runnable Jar you created.
 Then follow the same steps as for the installation without compilation.
 
 ### Install without compilation
@@ -16,10 +16,10 @@ to:
 ```bash
 setx YOUR_JAVA Path
 ```
-where Path is a path to your Java Runtime Environment (JRE) installation.
-If you do not have JRE you can download it from here: https://www.oracle.com/java/technologies/downloads/
+where Path is a path to your Java Runtime Environment (`JRE`) installation.
+If you do not have `JRE` you can download it from [here](https://www.oracle.com/java/technologies/downloads/)
 
-Once you did it, you can just run install.bat, grant admin permissions (needed to install the Windows extensions) and you are done.
+Once you did it, you can just run `install.bat`, grant admin permissions (needed to install the Windows extensions) and you are done.
 
 ## Usage
 
