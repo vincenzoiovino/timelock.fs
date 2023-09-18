@@ -17,6 +17,7 @@ to:
 setx YOUR_JAVA Path
 ```
 where Path is a path to your Java Runtime Environment (JRE) installation.
+If you do not have JRE you can download it from here: https://www.oracle.com/java/technologies/downloads/
 
 Once you did it, you can just run install.bat, grant admin permissions (needed to install the Windows extensions) and you are done
 
