@@ -3,7 +3,7 @@ timelock.fs is an extension for the timelock.zone service (https://www.timelock.
 
 ## Installation
 ### Install from source
-Compile the source code to a Java runnable file named `timeloc.fs.jar` in the `bin` folder or in any folder: the only requirement is that the file `install.bat` stays in the same folder as the runnable Jar you created.
+Compile the source code to a Java runnable Jar file named `timeloc.fs.jar` in the `bin` folder or in any folder: the only requirement is that the file `install.bat` stays in the same folder as the runnable Jar you created.
 Then follow the same steps as for the installation without compilation.
 
 ### Install without compilation
