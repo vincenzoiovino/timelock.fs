@@ -31,3 +31,12 @@ You will be prompted to choose a date in the future in the format DD/MM/YYYY and
 ### Decrypt
 The encrypted file is protected until the day before the date you selected.
 When the day you selected is reached you can right click on the file, select `Show more options` (this may depend on your Windows version) and then click on `timelock.fs.decrypt`. Your file will be decrypted and you will recover the file `MyFile.pdf`.
+
+## Screenshots
+<img src="screenshottlockfs1.jpg" width="30%" height="30%" />
+<br>
+<img src="screenshottlockfs2.jpg" width="30%" height="30%" />
+<br>
+<img src="screenshottlockfs3.jpg" width="30%" height="30%" />
+<br>
+<img src="screenshottlockfs4.jpg" width="30%" height="30%" />
