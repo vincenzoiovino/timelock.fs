@@ -14,7 +14,7 @@ setx YOUR_JAVA "C:\Program Files\Java\jdk-16.0.1"
 ```
 to:
 ```bash
-setx YOUR_JAVA Path
+setx YOUR_JAVA "Path"
 ```
 where `Path` is a path to your Java Runtime Environment (`JRE`) installation.
 If you do not have `JRE` you can download it from [here](https://www.oracle.com/java/technologies/downloads/). Usually `Path` has the form `C:\Program Files\Java\jdk-XX.Y.Z`. If your `JRE` is installed correctly you should have a file `javaw.exe` under the folder `Path\bin`.
