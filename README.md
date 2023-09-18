@@ -1,5 +1,5 @@
 # timelock.fs
-`timelock.fs` is an extension for the [timelock.zone service](https://www.timelock.zone) that enables to encrypt to the future any file and decrypts it using the Windows Explorer.
+`timelock.fs` is an extension for the [timelock.zone](https://www.timelock.zone) service that enables to encrypt to the future and decrypts any file using Windows Explorer.
 See also See also [tlcs-c](https://github.com/aragonzkresearch/tlcs-c/), [Timelock.zone.AndroidExample](https://github.com/vincenzoiovino/Timelock.zone.AndroidExample) and [TLCS Usage](https://github.com/aragonzkresearch/tlcs-c/blob/main/examples/howtoencrypt.md).
 ## Installation
 ### Install from source
