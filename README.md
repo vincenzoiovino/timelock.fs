@@ -25,7 +25,7 @@ Once you did it, you can just run install.bat, grant admin permissions (needed t
 
 ### Encrypt to the future
 You can right click on any file, e.g. `MyFile.pdf`, in Windows Explorer, select `Show more options` (this may depend on your Windows version) and then click on `timelock.fs.encrypt`.
-You will be prompted to choose a date in the future in the format DD/MM/YYYY and then you will just have to click on the `Encrypt` button. It will be created a file `MyFile.pdf.tlcs` that contains the encrypted version of the file `MyFile.pdf`. You can now delete the original file if you want to hide it.
+You will be prompted to choose a date in the future in the format DD/MM/YYYY and then you will just have to click on the `Encrypt` button. It will be created a file `MyFile.pdf.tlcs` that contains the encrypted version of the file `MyFile.pdf`. You can now delete the original file `MyFile.pdf` if you want to hide it until the chosen day.
 
 
 ### Decrypt
