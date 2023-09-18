@@ -14,7 +14,7 @@ setx YOUR_JAVA "C:\Program Files\Java\jdk-16.0.1"
 ```
 to:
 ```bash
-echo setx YOUR_JAVA Path
+setx YOUR_JAVA Path
 ```
 where Path is a path to your Java Runtime Environment (JRE) installation.
 
