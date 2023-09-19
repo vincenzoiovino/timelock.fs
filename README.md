@@ -3,7 +3,7 @@
 See also See also [tlcs-c](https://github.com/aragonzkresearch/tlcs-c/), [Timelock.zone.AndroidExample](https://github.com/vincenzoiovino/Timelock.zone.AndroidExample) and [TLCS Usage](https://github.com/aragonzkresearch/tlcs-c/blob/main/examples/howtoencrypt.md).
 ## Installation
 ### Install from source
-Use `Java` tools or any IDE to build from the source code a runnable Jar file named `timelock.fs.jar` and stores it in the `bin` folder or in any other folder: the only requirement is that the file [`install.bat`](https://github.com/vincenzoiovino/timelock.fs/blob/main/bin/install.bat) must reside in the same folder as the runnable Jar you created.
+Use `Java` tools or any IDE to build from the source code a runnable Jar file named `timelock.fs.jar` and stores it in the `bin` folder or in any other folder: the only requirement is that the files [`install.bat`](https://github.com/vincenzoiovino/timelock.fs/blob/main/bin/install.bat) and [`uninstall.bat`](https://github.com/vincenzoiovino/timelock.fs/blob/main/bin/uninstall.bat) must reside in the same folder as the runnable Jar you created.
 Then follow the same steps as for the installation without compilation.
 
 ### Install without compilation
@@ -31,6 +31,10 @@ You will be prompted to choose a date in the future in the format DD/MM/YYYY and
 ### Decrypt
 The encrypted file is protected until the day before the date you selected.
 When the chosen day is reached you can right click on the file `MyFile.pdf.tlcs`, select `Show more options` (this may depend on your Windows version) and then click on `timelock.fs.decrypt`. Your file will be decrypted and you will recover the file `MyFile.pdf`.
+
+## Uninstall
+To uninstall the `timelock.fs` extensions, run [`uninstall.bat`](https://github.com/vincenzoiovino/timelock.fs/blob/main/bin/uninstall.bat) (you must grant admin permissions).
+
 
 ## Screenshots
 <img src="screenshottlockfs1.jpg" width="30%" height="30%" />
