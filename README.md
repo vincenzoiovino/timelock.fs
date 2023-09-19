@@ -33,7 +33,7 @@ The encrypted file is protected until the day before the date you selected.
 When the chosen day is reached you can right click on the file `MyFile.pdf.tlcs`, select `Show more options` (this may depend on your Windows version) and then click on `timelock.fs.decrypt`. Your file will be decrypted and you will recover the file `MyFile.pdf`.
 
 ## Uninstall
-To uninstall the `timelock.fs` extensions, run [`uninstall.bat`](https://github.com/vincenzoiovino/timelock.fs/blob/main/bin/uninstall.bat) (you must grant admin permissions).
+To uninstall the `timelock.fs` extensions, run [`uninstall.bat`](https://github.com/vincenzoiovino/timelock.fs/blob/main/bin/uninstall.bat) (you must grant admin permissions) from the same folder where you launched `install.bat`.
 
 
 ## Screenshots
