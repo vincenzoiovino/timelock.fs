@@ -7,7 +7,7 @@ Use `Java` tools or any IDE to build from the source code a runnable Jar file na
 Then follow the same steps as for the installation without compilation.
 
 ### Install without compilation
-Download the file [`timelock.fs.zip`](https://github.com/vincenzoiovino/timelock.fs/blob/main/timelock.fs.zip) and unzip it.  The so created folder `timelock.fs` contains two files `install.bat` and `uninstall.bat`.
+Download the file [`timelock.fs.zip`](https://github.com/vincenzoiovino/timelock.fs/blob/main/timelock.fs.zip) and unzip it.  The so created folder `timelock.fs` contains (among others) a file named `install.bat`.
 Edit the file `install.bat` with any editor (e.g. Notepad) and change the line:
 ```bash
 setx YOUR_JAVA "C:\Program Files\Java\jdk-16.0.1"
