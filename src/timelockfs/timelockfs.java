@@ -308,9 +308,10 @@ class timelockfs {
 
 		if (args.length<2) {
 			JOptionPane.showMessageDialog(f,
-					"No valid parameters",
-					"Error",
-					JOptionPane.WARNING_MESSAGE);
+					"timelock.fs can be used via the File Explorer.\nTo encrypt to the future: right click on any file, select \"timelock.fs.encrypt\" and follow the instructions.\nTo decrypt: right click on any file with .tlcs extension, select \"timelock.fs.decrypt\" and follow the instructions.\n\n"
+					+ "©timelock.zone 2023.",
+					"timelock.fs",
+					JOptionPane.PLAIN_MESSAGE);
 			return;	
 		}
 		else if (args[0].compareTo("encrypt")==0) {
