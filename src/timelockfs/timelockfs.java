@@ -148,7 +148,9 @@ class timelockfs {
 
 			PrivateKey Sk = kf.generatePrivate(new PKCS8EncodedKeySpec(sk));
 
-			Cipher iesCipher2 = Cipher.getInstance("ECIES","BC");
+			Cipher iesCipher2 = Cipher.getInstance("ECIES","BC"); 
+			// you can replace this with more secure instantiations of ECIES like "ECIESwithSHA256" etc. 
+			// Notice that the bouncycastle Jar file we provide in the installation is old and may not support other ECIES modes. Replace it with a newer release.
 			iesCipher2.init(Cipher.DECRYPT_MODE, Sk);
 			byte[] plainText2 = new byte[iesCipher2.getOutputSize(cipherText2.length)];
 			int ctlength2 = iesCipher2.update(cipherText2, 0, cipherText2.length - 1, plainText2);
