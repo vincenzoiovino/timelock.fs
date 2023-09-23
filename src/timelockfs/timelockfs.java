@@ -157,7 +157,7 @@ class timelockfs {
 			
 			iesCipher2.init(Cipher.DECRYPT_MODE, Sk);
 			// in newer  versions of BC you must use the following:
-			// iesCipher2.init(Cipher.DECRYPT_MODE, Sk,new IESParameterSpec(null,null,256));
+			// iesCipher2.init(Cipher.DECRYPT_MODE, Sk,new IESParameterSpec(null,null,128));
 			// or other combinations based on your ECIESwithXX... algorithm
 
 			byte[] plainText2 = new byte[iesCipher2.getOutputSize(cipherText2.length)];
@@ -262,7 +262,7 @@ class timelockfs {
 
 			iesCipher.init(Cipher.ENCRYPT_MODE, pub);
 			// in newer  versions of BC you must use the following:
-			// iesCipher.init(Cipher.ENCRYPT_MODE, pub, new IESParameterSpec(null,null,256));
+			// iesCipher.init(Cipher.ENCRYPT_MODE, pub, new IESParameterSpec(null,null,128));
 			// or other combinations based on your ECIESwithXX... algorithm
 			
 			// set plaintext from file
