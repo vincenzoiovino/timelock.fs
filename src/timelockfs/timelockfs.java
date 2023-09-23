@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -26,6 +27,8 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.ShortBufferException;
 import javax.swing.*;
+
+import org.bouncycastle.jce.spec.IESParameterSpec;
 
 
 class timelockfs {
@@ -151,7 +154,12 @@ class timelockfs {
 			Cipher iesCipher2 = Cipher.getInstance("ECIES","BC"); 
 			// you can replace this with more secure instantiations of ECIES like "ECIESwithSHA256" etc. 
 			// Notice that the bouncycastle Jar file we provide in the installation is old and may not support other ECIES modes. Replace it with a newer release.
+			
 			iesCipher2.init(Cipher.DECRYPT_MODE, Sk);
+			// in newer  versions of BC you must use the following:
+			// iesCipher2.init(Cipher.DECRYPT_MODE, Sk,new IESParameterSpec(null,null,0));
+			// or other combinations based on your ECIESwithXX... algorithm
+
 			byte[] plainText2 = new byte[iesCipher2.getOutputSize(cipherText2.length)];
 			int ctlength2 = iesCipher2.update(cipherText2, 0, cipherText2.length - 1, plainText2);
 			ctlength2 += iesCipher2.doFinal(plainText2, ctlength2);
@@ -161,7 +169,7 @@ class timelockfs {
 
 			try {
 				//                String t=toString(plainText2);
-				byte [] plainText3=new byte[plainText2.length-2];
+				byte [] plainText3=new byte[plainText2.length-2]; // the -2 (also in the next line) is due to a bug in the version of BC we use. In newer versions you must remove both of them.
 				for (int i=0;i<plainText2.length-2;i++)plainText3[i]=plainText2[i];
 
 				if (Files.exists(decryptedfile) && okcancel("The file "+decryptedfile.toString()+" already exists. Overwrite it?")==JOptionPane.CANCEL_OPTION) return;
@@ -186,6 +194,7 @@ class timelockfs {
 		} catch (InvalidKeySpecException | InvalidKeyException | NoSuchAlgorithmException |
 				ShortBufferException | NoSuchPaddingException | BadPaddingException |
 				IllegalBlockSizeException | NoSuchProviderException e) {
+			// in newer versions of BC you must add InvalidAlgorithmParameterException
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(f,
 					"Unable to decrypt:\n" +e.getMessage(),
@@ -234,7 +243,6 @@ class timelockfs {
 			Cipher iesCipher = Cipher.getInstance("ECIES", "BC");
 
 
-
 			long Round = Timelock.DateToRound(strDate);
 
 			byte[] pk;
@@ -253,7 +261,10 @@ class timelockfs {
 
 
 			iesCipher.init(Cipher.ENCRYPT_MODE, pub);
-
+			// in newer  versions of BC you must use the following:
+			// iesCipher.init(Cipher.ENCRYPT_MODE, pub, new IESParameterSpec(null,null,0));
+			// or other combinations based on your ECIESwithXX... algorithm
+			
 			// set plaintext from file
 			byte[] cipherText = new byte[iesCipher.getOutputSize(plainText.length)+1];
 
@@ -291,6 +302,7 @@ class timelockfs {
 		} catch (IOException | InvalidKeySpecException | InvalidKeyException | NoSuchAlgorithmException |
 				ShortBufferException | NoSuchPaddingException | BadPaddingException |
 				IllegalBlockSizeException | NoSuchProviderException e) {
+			// in newer versions of BC you must add InvalidAlgorithmParameterException
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(f,
 					"Unable to encrypt:\n"+file+" "+e.getMessage(),
