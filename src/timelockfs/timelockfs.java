@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -28,7 +27,6 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.ShortBufferException;
 import javax.swing.*;
 
-import org.bouncycastle.jce.spec.IESParameterSpec;
 
 
 class timelockfs {
@@ -38,7 +36,7 @@ class timelockfs {
 	private static JFrame f;
 	private static String file;
 	private static String scheme="secp256k1";
-
+	private static String TimelockZoneHeader="timelock.zone v10000001";
 
 	private static int okcancel(String s) {
 		int result = JOptionPane.showConfirmDialog((Component) null, s,
@@ -82,7 +80,7 @@ class timelockfs {
 				if (s.length() < 9) return;
 
 				try {
-					cipherText2 = Base64.getDecoder().decode(s.substring(8));
+					cipherText2 = Base64.getDecoder().decode(s.substring(TimelockZoneHeader.length()+8));
 
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(f,
@@ -96,7 +94,7 @@ class timelockfs {
 				strDate = new Date();
 				try {
 					SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
-					strDate = sdf.parse(s.substring(0, 8));
+					strDate = sdf.parse(s.substring(TimelockZoneHeader.length(), 8+TimelockZoneHeader.length()));
 					if (new Date().before(strDate)) {
 						JOptionPane.showMessageDialog(f,
 								"It is not time to decrypt yet. You must wait until " + s.substring(0, 2) + "/" + s.substring(2, 4) + "/" + s.substring(4, 8) + " (DD/MM/YYYY) " + "to decrypt",
@@ -169,8 +167,8 @@ class timelockfs {
 
 			try {
 				//                String t=toString(plainText2);
-				byte [] plainText3=new byte[plainText2.length-2]; // the -2 (also in the next line) is due to a bug in the version of BC we use. In newer versions you must remove both of them.
-				for (int i=0;i<plainText2.length-2;i++)plainText3[i]=plainText2[i];
+				byte [] plainText3=new byte[plainText2.length]; // the -2 (also in the next line) is due to a bug in the version of BC we use. In newer versions you must remove both of them.
+				for (int i=0;i<plainText2.length;i++)plainText3[i]=plainText2[i];
 
 				if (Files.exists(decryptedfile) && okcancel("The file "+decryptedfile.toString()+" already exists. Overwrite it?")==JOptionPane.CANCEL_OPTION) return;
 
@@ -241,8 +239,9 @@ class timelockfs {
 			KeyFactory kf = KeyFactory.getInstance("ECDH","BC");
 
 			Cipher iesCipher = Cipher.getInstance("ECIES", "BC");
-
-
+			// you can replace this with more secure instantiations of ECIES like "ECIESwithSHA256" etc. 
+			// Notice that the bouncycastle Jar file we provide in the installation is old and may not support other ECIES modes. Replace it with a newer release.
+			
 			long Round = Timelock.DateToRound(strDate);
 
 			byte[] pk;
@@ -262,13 +261,13 @@ class timelockfs {
 
 			iesCipher.init(Cipher.ENCRYPT_MODE, pub);
 			// in newer  versions of BC you must use the following:
-			// iesCipher.init(Cipher.ENCRYPT_MODE, pub, new IESParameterSpec(null,null,128));
+			//iesCipher.init(Cipher.ENCRYPT_MODE, pub, new IESParameterSpec(null,null,128));
 			// or other combinations based on your ECIESwithXX... algorithm
 			
 			// set plaintext from file
 			byte[] cipherText = new byte[iesCipher.getOutputSize(plainText.length)+1];
 
-
+			
 			int ctlength = iesCipher.update(plainText, 0, plainText.length, cipherText, 0);
 			iesCipher.doFinal(cipherText, ctlength);
 			cipherText[cipherText.length-1]='\0';
@@ -284,7 +283,7 @@ class timelockfs {
 
 				if (Files.exists(tlcsfile) && okcancel("The file "+tlcsfile.toString()+" already exists. Overwrite it?")==JOptionPane.CANCEL_OPTION) return;
 
-				Files.write(tlcsfile, (txtdate+cipherTextBase64).getBytes());
+				Files.write(tlcsfile, (TimelockZoneHeader+txtdate+cipherTextBase64).getBytes());
 
 
 			}
