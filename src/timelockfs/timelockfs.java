@@ -28,6 +28,8 @@ import javax.crypto.ShortBufferException;
 import javax.swing.*;
 
 
+import org.zone.timelock.*;
+
 
 class timelockfs {
 	private static JLabel label;
