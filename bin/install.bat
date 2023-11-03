@@ -8,7 +8,7 @@ if not "%1"=="am_admin" (
 )
 
 :: Change this line to point to the path of your JRE installation.
-setx YOUR_JAVA "C:\Program Files\Java\jdk-16.0.1"
+setx YOUR_JAVA "C:\Program Files\Java\jdk-15.0.2"
 
 reg ADD "HKEY_CLASSES_ROOT\*\shell\timelock.fs.encrypt"  /f
 reg ADD "HKEY_CLASSES_ROOT\*\shell\timelock.fs.encrypt" /f /t REG_SZ /d "timelock.fs.encrypt"
@@ -23,7 +23,7 @@ reg ADD "HKEY_CLASSES_ROOT\.tlcs\shell\timelock.fs.decrypt\command" /f /ve /d "%
 echo ---------------------------------------------------------------------------------------------
 echo Installation terminated. 
 echo If you cannot find the timelock.fs extensions you must edit in this install.bat file the line:
-echo setx YOUR_JAVA "C:\Program Files\Java\jdk-16.0.1"
+echo setx YOUR_JAVA "C:\Program Files\Java\jdk-15.0.2"
 echo and change it to:
 echo setx YOUR_JAVA "Path"
 echo where Path is a path to your Java Runtime Environment (JRE) installation.
