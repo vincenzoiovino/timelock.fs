@@ -135,7 +135,7 @@ class timelockfs {
 
 			byte[] sk;
 
-			long Round = Timelock.DateToRound(strDate);
+			long Round = Timelock.DayToRound(strDate);
 			// retrieve SK from round R
 			try {
 				sk = Timelock.getSecretKeyFromRound(Round, scheme);
@@ -154,7 +154,7 @@ class timelockfs {
 			Cipher iesCipher2 = Cipher.getInstance("ECIES","BC"); 
 			// you can replace this with more secure instantiations of ECIES like "ECIESwithSHA256" etc. 
 			// Notice that the bouncycastle Jar file we provide in the installation is old and may not support other ECIES modes. Replace it with a newer release.
-			
+
 			iesCipher2.init(Cipher.DECRYPT_MODE, Sk);
 			// in newer  versions of BC you must use the following:
 			// iesCipher2.init(Cipher.DECRYPT_MODE, Sk,new IESParameterSpec(null,null,128));
@@ -243,12 +243,11 @@ class timelockfs {
 			Cipher iesCipher = Cipher.getInstance("ECIES", "BC");
 			// you can replace this with more secure instantiations of ECIES like "ECIESwithSHA256" etc. 
 			// Notice that the bouncycastle Jar file we provide in the installation is old and may not support other ECIES modes. Replace it with a newer release.
-			
-			long Round = Timelock.DateToRound(strDate);
+			long Round = Timelock.DayToRound(strDate);
 
 			byte[] pk;
 			try {
-				pk = Timelock.getPublicKeyFromRound(Round, scheme);
+				pk = Timelock.getPublicKeyFromRound(Round, scheme);  // retrieve PK based on the given Round and scheme
 			} catch(Exception e) {
 				JOptionPane.showMessageDialog(f,
 						"Timelock.zone service not working now. Try later.",
@@ -256,7 +255,6 @@ class timelockfs {
 						JOptionPane.WARNING_MESSAGE);         
 				return;
 			}
-			// retrieve PK based on the round Round
 
 			PublicKey pub = kf.generatePublic(new X509EncodedKeySpec(pk));
 
@@ -265,11 +263,11 @@ class timelockfs {
 			// in newer  versions of BC you must use the following:
 			//iesCipher.init(Cipher.ENCRYPT_MODE, pub, new IESParameterSpec(null,null,128));
 			// or other combinations based on your ECIESwithXX... algorithm
-			
+
 			// set plaintext from file
 			byte[] cipherText = new byte[iesCipher.getOutputSize(plainText.length)+1];
 
-			
+
 			int ctlength = iesCipher.update(plainText, 0, plainText.length, cipherText, 0);
 			iesCipher.doFinal(cipherText, ctlength);
 			cipherText[cipherText.length-1]='\0';
@@ -324,9 +322,9 @@ class timelockfs {
 		if (args.length<2) {
 			JOptionPane.showMessageDialog(f,
 					"timelock.fs can be used via the File Explorer.\nTo encrypt to the future: right click on any file, select \"timelock.fs.encrypt\" and follow the instructions.\nTo decrypt: right click on any file with .tlcs extension, select \"timelock.fs.decrypt\" and follow the instructions.\n\n"
-					+ "©timelock.zone 2023.",
-					"timelock.fs",
-					JOptionPane.PLAIN_MESSAGE);
+							+ "Â©timelock.zone 2023.",
+							"timelock.fs",
+							JOptionPane.PLAIN_MESSAGE);
 			return;	
 		}
 		else if (args[0].compareTo("encrypt")==0) {
