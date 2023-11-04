@@ -33,17 +33,27 @@ import org.zone.timelock.*;
 
 class timelockfs {
 	private static JLabel label;
+	private static JLabel label2;
+	private static JComboBox List;
 	private static JTextField text;
 	private static JPanel p;
 	private static JFrame f;
 	private static String file;
-	private static String scheme="secp256k1";
-	private static String TimelockZoneHeader="timelock.zone v10000001";
+	private static final String scheme="secp256k1";
+	private static final String TimelockZoneHeader="timelock.zone v10000001";
+	private static final int length_date=10; // DDMMyyyyhh
+	private static final String tlcs_extension=".tlcs";
+	private static final String[] hourStrings = { "00", "01", "02", "03", "04", "05", "06", "07", "08","09", "10", "11", "12", "13","14","15","16","17","18","19","20","21","22","23" };
 
 	private static int okcancel(String s) {
 		int result = JOptionPane.showConfirmDialog((Component) null, s,
 				"Alert", JOptionPane.OK_CANCEL_OPTION);
 		return result;
+	}
+
+	private static String HourParsing(String hour) {
+		if (Integer.valueOf(hour)<= 12) return hour+"AM";
+		else return (Integer.valueOf(hour)-12)+"PM";
 	}
 
 	private static String toString(
@@ -79,28 +89,28 @@ class timelockfs {
 
 				s=Files.readString(tlcsfile);
 
-				if (s.length() < 9) return;
+				if (s.length() <= length_date) return;
 
 				try {
-					cipherText2 = Base64.getDecoder().decode(s.substring(TimelockZoneHeader.length()+8));
+					cipherText2 = Base64.getDecoder().decode(s.substring(TimelockZoneHeader.length()+length_date));
 
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(f,
 							"Invalid ciphertext format",
 							"Error",
-							JOptionPane.WARNING_MESSAGE);                    
+							JOptionPane.ERROR_MESSAGE);                    
 					System.exit(1);
 					return;
 				}
 
 				strDate = new Date();
 				try {
-					SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
-					strDate = sdf.parse(s.substring(TimelockZoneHeader.length(), 8+TimelockZoneHeader.length()));
+					SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhh");
+					strDate = sdf.parse(s.substring(TimelockZoneHeader.length(), length_date+TimelockZoneHeader.length()));
 					if (new Date().before(strDate)) {
 						JOptionPane.showMessageDialog(f,
-								"It is not time to decrypt yet. You must wait until " + s.substring(0, 2) + "/" + s.substring(2, 4) + "/" + s.substring(4, 8) + " (DD/MM/YYYY) " + "to decrypt",
-								"Error",
+								"It is not time to decrypt yet. You must wait until " + s.substring(0, 2) + "/" + s.substring(2, 4) + "/" + s.substring(4, 8) + " (DD/MM/YYYY), " + HourParsing(s.substring(8,10))+  " to decrypt",
+								"Warning",
 								JOptionPane.WARNING_MESSAGE);                    
 						System.exit(1);
 						return;
@@ -111,7 +121,7 @@ class timelockfs {
 					JOptionPane.showMessageDialog(f,
 							"Invalid Date in the  ciphertext.",
 							"Error",
-							JOptionPane.WARNING_MESSAGE);  
+							JOptionPane.ERROR_MESSAGE);  
 					System.exit(1);
 					return;
 				}
@@ -126,7 +136,7 @@ class timelockfs {
 				JOptionPane.showMessageDialog(f,
 						"Unable to read from file"+file+"\nThis can be due to the fact that you do not have permissions to read.",
 						"Error",
-						JOptionPane.WARNING_MESSAGE);        
+						JOptionPane.ERROR_MESSAGE);        
 				System.exit(1);
 				return;
 			}
@@ -135,7 +145,7 @@ class timelockfs {
 
 			byte[] sk;
 
-			long Round = Timelock.DayToRound(strDate);
+			long Round = Timelock.DateToRound(strDate);
 			// retrieve SK from round R
 			try {
 				sk = Timelock.getSecretKeyFromRound(Round, scheme);
@@ -143,7 +153,7 @@ class timelockfs {
 				JOptionPane.showMessageDialog(f,
 						"Unable to retrive the secret key from the timelock.zone service. Try later.",
 						"Error",
-						JOptionPane.WARNING_MESSAGE);                       
+						JOptionPane.ERROR_MESSAGE);                       
 				System.exit(1);
 				return;
 			}
@@ -165,11 +175,10 @@ class timelockfs {
 			ctlength2 += iesCipher2.doFinal(plainText2, ctlength2);
 			// System.out.println("decrypted plaintext: " + ctlength2 + " " + cipherText2.length + " " + toString(plainText2));
 
-			Path decryptedfile=Paths.get(file.substring(0,file.length()-5));
+			Path decryptedfile=Paths.get(file.substring(0,file.length()-tlcs_extension.length())); 
 
 			try {
-				//                String t=toString(plainText2);
-				byte [] plainText3=new byte[plainText2.length]; // the -2 (also in the next line) is due to a bug in the version of BC we use. In newer versions you must remove both of them.
+				byte [] plainText3=new byte[plainText2.length]; 
 				for (int i=0;i<plainText2.length;i++)plainText3[i]=plainText2[i];
 
 				if (Files.exists(decryptedfile) && okcancel("The file "+decryptedfile.toString()+" already exists. Overwrite it?")==JOptionPane.CANCEL_OPTION) return;
@@ -182,7 +191,7 @@ class timelockfs {
 				e.printStackTrace();
 
 				JOptionPane.showMessageDialog(f,
-						"Unable to write to file"+file.substring(0,file.length()-5)+"\nThis can be due to the fact that the file is open or you do not have permissions to write.",
+						"Unable to write to file"+file.substring(0,file.length()-tlcs_extension.length())+"\nThis can be due to the fact that the file is open or you do not have permissions to write.",
 						"Error",
 						JOptionPane.WARNING_MESSAGE);        
 				System.exit(1);
@@ -199,7 +208,7 @@ class timelockfs {
 			JOptionPane.showMessageDialog(f,
 					"Unable to decrypt:\n" +e.getMessage(),
 					"Error",
-					JOptionPane.WARNING_MESSAGE);         
+					JOptionPane.ERROR_MESSAGE);         
 			System.exit(1);
 		}
 
@@ -211,21 +220,31 @@ class timelockfs {
 	private static void encrypt() {
 
 		String s=text.getText();
-
+		int index=List.getSelectedIndex();
+		if (index==-1) {
+			JOptionPane.showMessageDialog(f,
+					"You should choose an hour.",
+					"Warning",
+					JOptionPane.WARNING_MESSAGE);    
+			return;
+		}
+		s=s+"/"+hourStrings[index];
+		System.out.println(s);
 		Date strDate = new Date();
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/hh");
 			strDate = sdf.parse(s);
 			if (new Date().after(strDate)) {
-				if (okcancel("You should select a date in the future. Do you want to continue anyway with this date?")==JOptionPane.CANCEL_OPTION) return;
+				if (okcancel("You should select a date and hour in the future. Do you want to continue anyway with this date and hour?")==JOptionPane.CANCEL_OPTION) return;
 			}
 
 
 		} catch (ParseException e) {
 			JOptionPane.showMessageDialog(f,
 					"Invalid date format.",
-					"Error",
+					"Warning",
 					JOptionPane.WARNING_MESSAGE);        
+			return;
 		}
 
 
@@ -243,7 +262,7 @@ class timelockfs {
 			Cipher iesCipher = Cipher.getInstance("ECIES", "BC");
 			// you can replace this with more secure instantiations of ECIES like "ECIESwithSHA256" etc. 
 			// Notice that the bouncycastle Jar file we provide in the installation is old and may not support other ECIES modes. Replace it with a newer release.
-			long Round = Timelock.DayToRound(strDate);
+			long Round = Timelock.DateToRound(strDate);
 
 			byte[] pk;
 			try {
@@ -252,7 +271,7 @@ class timelockfs {
 				JOptionPane.showMessageDialog(f,
 						"Timelock.zone service not working now. Try later.",
 						"Error",
-						JOptionPane.WARNING_MESSAGE);         
+						JOptionPane.ERROR_MESSAGE);         
 				return;
 			}
 
@@ -274,9 +293,9 @@ class timelockfs {
 			String cipherTextBase64=Base64.getEncoder().encodeToString(cipherText);
 			//  System.out.println(Base64.getEncoder().encodeToString(cipherText));
 
-			String txtdate=s.substring(0,2)+s.substring(3,5)+s.substring(6,10);
+			String txtdate=s.substring(0,2)+s.substring(3,5)+s.substring(6,10)+s.substring(11,13); // convert DD/MM/yyyy/hh into DDMMyyyyhh
 
-			Path tlcsfile=Paths.get(file+".tlcs");
+			Path tlcsfile=Paths.get(file+tlcs_extension);
 
 			// copy to file.tlcs
 			try {
@@ -294,7 +313,7 @@ class timelockfs {
 				JOptionPane.showMessageDialog(f,
 						"Unable to write to file"+file+".tlcs"+"\nThis can be due to the fact that the file is open or you do not have permissions to write.",
 						"Error",
-						JOptionPane.WARNING_MESSAGE);        
+						JOptionPane.ERROR_MESSAGE);        
 				return;
 			}
 
@@ -306,7 +325,7 @@ class timelockfs {
 			JOptionPane.showMessageDialog(f,
 					"Unable to encrypt:\n"+file+" "+e.getMessage(),
 					"Error",
-					JOptionPane.WARNING_MESSAGE);         
+					JOptionPane.ERROR_MESSAGE);         
 			return; 
 		}
 
@@ -331,12 +350,17 @@ class timelockfs {
 
 
 			label = new JLabel("Choose a date (DD/MM/YYYY):");
+			label2 = new JLabel("Choose a hour:");
+
+			List = new JComboBox(hourStrings);
 
 			text = new JTextField(20);
 			JButton b = new JButton("Encrypt");
 			p = new JPanel();
 			p.add(label);
 			p.add(text);
+			p.add(label2);
+			p.add(List);
 			f = new JFrame();
 			f.setTitle("Timelock.fs");
 			f.getContentPane().add(p);
