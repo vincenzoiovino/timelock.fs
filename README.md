@@ -27,12 +27,12 @@ Once you edited the file `install.bat` as described before, you can run `install
 
 ### Encrypt to the future
 You can right click on any file, e.g. `MyFile.pdf`, in Windows Explorer, select `Show more options` (this may depend on your Windows version) and then click on `timelock.fs.encrypt`.
-You will be prompted to choose a date in the future in the format DD/MM/YYYY and then you will just have to click on the `Encrypt` button. It will be created a file `MyFile.pdf.tlcs` that contains the encrypted version of the file `MyFile.pdf`. You can now delete the original file `MyFile.pdf` if you want to hide it until the chosen day.
+You will be prompted to choose a date in the future in the format DD/MM/YYYY and an hour. Then you will just have to click on the `Encrypt` button. It will be created a file `MyFile.pdf.tlcs` that contains the encrypted version of the file `MyFile.pdf`. You can now delete the original file `MyFile.pdf` if you want to hide it until the chosen day.
 
 
 ### Decrypt
 The encrypted file is protected until the day before the chosen date.
-When the chosen day is reached you can right click on the file `MyFile.pdf.tlcs`, select `Show more options` (this may depend on your Windows version) and then click on `timelock.fs.decrypt`. Your file will be decrypted and you will recover the file `MyFile.pdf`.
+When the chosen day and hour is reached you can right click on the file `MyFile.pdf.tlcs`, select `Show more options` (this may depend on your Windows version) and then click on `timelock.fs.decrypt`. Your file will be decrypted and you will recover the file `MyFile.pdf`.
 
 ## Uninstall
 To uninstall the `timelock.fs` extensions, run [`uninstall.bat`](https://github.com/vincenzoiovino/timelock.fs/blob/main/bin/uninstall.bat) (you must grant admin permissions) from the same folder where you launched `install.bat`.
