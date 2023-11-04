@@ -350,7 +350,7 @@ class timelockfs {
 
 
 			label = new JLabel("Choose a date (DD/MM/YYYY):");
-			label2 = new JLabel("Choose a hour:");
+			label2 = new JLabel("Choose an hour:");
 
 			List = new JComboBox(hourStrings);
 
