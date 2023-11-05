@@ -105,11 +105,12 @@ class timelockfs {
 
 				strDate = new Date();
 				try {
+					final String t=s.substring(TimelockZoneHeader.length());
 					SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhh");
 					strDate = sdf.parse(s.substring(TimelockZoneHeader.length(), length_date+TimelockZoneHeader.length()));
 					if (new Date().before(strDate)) {
 						JOptionPane.showMessageDialog(f,
-								"It is not time to decrypt yet. You must wait until " + s.substring(0, 2) + "/" + s.substring(2, 4) + "/" + s.substring(4, 8) + " (DD/MM/YYYY), " + HourParsing(s.substring(8,10))+  " to decrypt",
+								"It is not time to decrypt yet. You must wait until " + t.substring(0, 2) + "/" + t.substring(2, 4) + "/" + t.substring(4, 8) + " (DD/MM/YYYY), " + HourParsing(t.substring(8,10))+  " to decrypt",
 								"Warning",
 								JOptionPane.WARNING_MESSAGE);                    
 						System.exit(1);
@@ -350,7 +351,7 @@ class timelockfs {
 
 
 			label = new JLabel("Choose a date (DD/MM/YYYY):");
-			label2 = new JLabel("Choose an hour:");
+			label2 = new JLabel("Choose a hour:");
 
 			List = new JComboBox(hourStrings);
 
