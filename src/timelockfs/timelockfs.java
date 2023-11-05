@@ -42,7 +42,7 @@ class timelockfs {
 	private static String file;
 	private static final String scheme="secp256k1";
 	private static final String TimelockZoneHeader="timelock.zone v10000001";
-	private static final int length_date=10; // DDMMyyyyhh
+	private static final int length_date=10; // DDMMyyyyHH
 	private static final String tlcs_extension=".tlcs";
 	private static final String[] hourStrings = { "00", "01", "02", "03", "04", "05", "06", "07", "08","09", "10", "11", "12", "13","14","15","16","17","18","19","20","21","22","23" };
 
@@ -107,7 +107,7 @@ class timelockfs {
 				strDate = new Date();
 				try {
 					final String t=s.substring(TimelockZoneHeader.length());
-					SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhh");
+					SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHH");
 					sdf.setTimeZone(TimeZone.getTimeZone(Timelock.timezone));
 					strDate = sdf.parse(s.substring(TimelockZoneHeader.length(), length_date+TimelockZoneHeader.length()));
 					if (new Date().before(strDate)) {
@@ -234,7 +234,7 @@ class timelockfs {
 		}
 		s=s+"/"+hourStrings[index];
 		Date strDate = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/hh");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH");
 		try {
 			strDate = sdf.parse(s);
 			if (new Date().after(strDate)) {
@@ -296,7 +296,7 @@ class timelockfs {
 			String cipherTextBase64=Base64.getEncoder().encodeToString(cipherText);
 			//  System.out.println(Base64.getEncoder().encodeToString(cipherText));
 
-			String txtdate=s.substring(0,2)+s.substring(3,5)+s.substring(6,10)+s.substring(11,13); // convert DD/MM/yyyy/hh into DDMMyyyyhh
+			String txtdate=s.substring(0,2)+s.substring(3,5)+s.substring(6,10)+s.substring(11,13); // convert DD/MM/yyyy/HH into DDMMyyyyHH
 
 			Path tlcsfile=Paths.get(file+tlcs_extension);
 
