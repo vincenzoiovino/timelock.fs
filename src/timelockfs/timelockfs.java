@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
+import java.util.TimeZone;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -107,10 +108,12 @@ class timelockfs {
 				try {
 					final String t=s.substring(TimelockZoneHeader.length());
 					SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhh");
+					sdf.setTimeZone(TimeZone.getTimeZone(Timelock.timezone));
 					strDate = sdf.parse(s.substring(TimelockZoneHeader.length(), length_date+TimelockZoneHeader.length()));
 					if (new Date().before(strDate)) {
 						JOptionPane.showMessageDialog(f,
-								"It is not time to decrypt yet. You must wait until " + t.substring(0, 2) + "/" + t.substring(2, 4) + "/" + t.substring(4, 8) + " (DD/MM/YYYY), " + HourParsing(t.substring(8,10))+  " to decrypt",
+								//								"It is not time to decrypt yet. You must wait until " + t.substring(0, 2) + "/" + t.substring(2, 4) + "/" + t.substring(4, 8) + " (DD/MM/YYYY), " + HourParsing(t.substring(8,10))+  " to decrypt",
+								"It is not time to decrypt yet. You must wait until " + strDate.toLocaleString() + " to decrypt",
 								"Warning",
 								JOptionPane.WARNING_MESSAGE);                    
 						System.exit(1);
@@ -230,10 +233,9 @@ class timelockfs {
 			return;
 		}
 		s=s+"/"+hourStrings[index];
-		System.out.println(s);
 		Date strDate = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/hh");
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/hh");
 			strDate = sdf.parse(s);
 			if (new Date().after(strDate)) {
 				if (okcancel("You should select a date and hour in the future. Do you want to continue anyway with this date and hour?")==JOptionPane.CANCEL_OPTION) return;
@@ -248,8 +250,8 @@ class timelockfs {
 			return;
 		}
 
-
-
+		sdf.setTimeZone(TimeZone.getTimeZone(Timelock.timezone));
+		s=sdf.format(strDate); // convert s in timelock.zone timezone
 
 
 
