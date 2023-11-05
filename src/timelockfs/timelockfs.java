@@ -251,7 +251,7 @@ class timelockfs {
 		}
 
 		sdf.setTimeZone(TimeZone.getTimeZone(Timelock.timezone));
-		s=sdf.format(strDate); // convert s in timelock.zone timezone
+		s=sdf.format(strDate); // format s in timelock.zone timezone
 
 
 
