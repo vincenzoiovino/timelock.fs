@@ -21,8 +21,8 @@ Once you edited the file `install.bat` as described before, you can run `install
 Disclaimer: we used a very old version of `bouncycastle` for simplicity and we did not care about enforcing more stringent level of security for `ECIES`. This repo is only for testing `timelock.zone` functionalities. You can easy adapt all code to any `bouncycastle` version and different `ECIES` variant. 
 ### Install without compilation
 Download the file [`timelock.fs.zip`](https://github.com/vincenzoiovino/timelock.fs/blob/main/timelock.fs.zip) and unzip it.  The so created folder `timelock.fs` contains (among others) a file named `install.bat`.
-Download [JDK 15.0.2](https://www.oracle.com/java/technologies/javase/jdk15-archive-downloads.html).
-You should have a folder `C:\Program Files\Java\jdk-15.0.2`. (If the path differs, follows the previous instructions to edit the variable `YOUR_JAVA` in the `install.bat` file.)
+Download [JDK 15.0.2](https://jdk.java.net/archive/).
+Copy the folder `jdk-15.0.2` in the same folder as the `install.bat` file. 
 Run `install.bat`, grant admin permissions (needed to install the Windows extensions) and you are done.
 
 ## Usage
