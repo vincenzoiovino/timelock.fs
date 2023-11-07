@@ -2,7 +2,7 @@
 `timelock.fs` is an extension for the [timelock.zone](https://www.timelock.zone) service that enables to encrypt to the future and decrypts any file using Windows Explorer.
 See also [tlcs-c](https://github.com/aragonzkresearch/tlcs-c/), [tlcs-rust](https://github.com/aragonzkresearch/tlcs-rust/), [Timelock.zone.AndroidExample](https://github.com/vincenzoiovino/Timelock.zone.AndroidExample) and [TLCS Usage](https://github.com/aragonzkresearch/tlcs-c/blob/main/examples/howtoencrypt.md).
 
-## Compilation
+## Compilation and installation from sources
 Add as dependencies ``bcprov-jdk15on-168.jar``, ``json-simple-1.1.jar`` and [``timelock.zone.jar``](https://github.com/vincenzoiovino/TimelockJavaAPI/tree/main).
 Use `Java` tools or any IDE to build from the source code a runnable Jar file named `timelock.fs.jar` and stores it in the `bin` folder or in any other folder: the only requirement is that the files [`install.bat`](https://github.com/vincenzoiovino/timelock.fs/blob/main/bin/install.bat) and [`uninstall.bat`](https://github.com/vincenzoiovino/timelock.fs/blob/main/bin/uninstall.bat) must reside in the same folder as the runnable Jar you created.
 Then follow the same steps as for the installation without compilation.
@@ -10,12 +10,12 @@ Then follow the same steps as for the installation without compilation.
 Disclaimer: we used a very old version of `bouncycastle` for simplicity and we did not care about enforcing more stringent level of security for `ECIES`. This repo is only for testing `timelock.zone` functionalities. You can easy adapt all code to any `bouncycastle` version and different `ECIES` variant. 
 
 ## Installation
-### Automatic installation
+### Quick installation
 Download the file [`timelock.fs.zip`](https://github.com/vincenzoiovino/timelock.fs/blob/main/timelock.fs.zip) and unzip it.  The so created folder `timelock.fs` contains (among others) a file named `setup.bat`.
 Just run `setup.bat`, grant admin permissions (needed to install the Windows extensions) and you are done.
 
-### Manual installation from compiled jar
-Download the file [`timelock.fs.zip`](https://github.com/vincenzoiovino/timelock.fs/blob/main/timelock.fs.zip) and unzip it.  The so created folder `timelock.fs` contains (among others) a file named `install.bat`.
+### Alternative installation from compiled jar
+Download the file [`timelock.fs.zip`](https://github.com/vincenzoiovino/timelock.fs/blob/main/timelock.fs.zip) and unzip it.  The so created folder `timelock.fs` contains (among others) a file named `install.bat` that should be the same as [`here`](https://github.com/vincenzoiovino/timelock.fs/blob/main/bin/install.bat).
 Replace the file `timelock.fs.jar` with the `jar` file with the same name you compiled from the sources.
 Edit the file `install.bat` with any editor (e.g. Notepad) and change the line:
 ```bash
