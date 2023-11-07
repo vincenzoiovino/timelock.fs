@@ -11,6 +11,7 @@ Disclaimer: we used a very old version of `bouncycastle` for simplicity and we d
 ### Install without compilation
 
 #### Automatic installation
+Download the file [`timelock.fs.zip`](https://github.com/vincenzoiovino/timelock.fs/blob/main/timelock.fs.zip) and unzip it.  The so created folder `timelock.fs` contains (among others) a file named `setup.bat`.
 Just run `setup.bat`, grant admin permissions (needed to install the Windows extensions) and you are done.
 
 #### Manual installation
