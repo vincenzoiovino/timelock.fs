@@ -9,6 +9,12 @@ Then follow the same steps as for the installation without compilation.
 
 Disclaimer: we used a very old version of `bouncycastle` for simplicity and we did not care about enforcing more stringent level of security for `ECIES`. This repo is only for testing `timelock.zone` functionalities. You can easy adapt all code to any `bouncycastle` version and different `ECIES` variant. 
 ### Install without compilation
+
+#### Automatic installation
+Just run 'setup.bat', grant admin permissions (needed to install the Windows extensions) and you are done.
+
+#### Manual installation
+If the previous installation does not work, you should do the following manual installation.
 Download the file [`timelock.fs.zip`](https://github.com/vincenzoiovino/timelock.fs/blob/main/timelock.fs.zip) and unzip it.  The so created folder `timelock.fs` contains (among others) a file named `install.bat`.
 Edit the file `install.bat` with any editor (e.g. Notepad) and change the line:
 ```bash
