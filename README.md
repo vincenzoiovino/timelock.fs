@@ -1,22 +1,10 @@
 # timelock.fs
 `timelock.fs` is an extension for the [timelock.zone](https://www.timelock.zone) service that enables to encrypt to the future and decrypts any file using Windows Explorer.
 See also [tlcs-c](https://github.com/aragonzkresearch/tlcs-c/), [tlcs-rust](https://github.com/aragonzkresearch/tlcs-rust/), [Timelock.zone.AndroidExample](https://github.com/vincenzoiovino/Timelock.zone.AndroidExample) and [TLCS Usage](https://github.com/aragonzkresearch/tlcs-c/blob/main/examples/howtoencrypt.md).
-
-## Compilation and installation from sources
+## Installation
+### Install from source
 Add as dependencies ``bcprov-jdk15on-168.jar``, ``json-simple-1.1.jar`` and [``timelock.zone.jar``](https://github.com/vincenzoiovino/TimelockJavaAPI/tree/main).
 Use `Java` tools or any IDE to build from the source code a runnable Jar file named `timelock.fs.jar` and stores it in the `bin` folder or in any other folder: the only requirement is that the files [`install.bat`](https://github.com/vincenzoiovino/timelock.fs/blob/main/bin/install.bat) and [`uninstall.bat`](https://github.com/vincenzoiovino/timelock.fs/blob/main/bin/uninstall.bat) must reside in the same folder as the runnable Jar you created.
-Then follow the same steps as for the installation without compilation.
-
-Disclaimer: we used a very old version of `bouncycastle` for simplicity and we did not care about enforcing more stringent level of security for `ECIES`. This repo is only for testing `timelock.zone` functionalities. You can easy adapt all code to any `bouncycastle` version and different `ECIES` variant. 
-
-## Installation
-### Quick installation
-Download the file [`timelock.fs.zip`](https://github.com/vincenzoiovino/timelock.fs/blob/main/timelock.fs.zip) and unzip it.  The so created folder `timelock.fs` contains (among others) a file named `setup.bat`.
-Just run `setup.bat`, grant admin permissions (needed to install the Windows extensions) and you are done.
-
-### Alternative installation from compiled jar
-Download the file [`timelock.fs.zip`](https://github.com/vincenzoiovino/timelock.fs/blob/main/timelock.fs.zip) and unzip it.  The so created folder `timelock.fs` contains (among others) a file named `install.bat` that should be the same as [`here`](https://github.com/vincenzoiovino/timelock.fs/blob/main/bin/install.bat).
-Replace the file `timelock.fs.jar` with the `jar` file with the same name you compiled from the sources.
 Edit the file `install.bat` with any editor (e.g. Notepad) and change the line:
 ```bash
 setx YOUR_JAVA "C:\Program Files\Java\jdk-15.0.2"
@@ -25,10 +13,17 @@ to:
 ```bash
 setx YOUR_JAVA "Path"
 ```
-where `Path` is a path to your Java Runtime Environment (`JRE`) installation.
-If you do not have `JRE` you can download it from [here](https://www.oracle.com/java/technologies/downloads/). Usually `Path` has the form `C:\Program Files\Java\jdk-XX.Y.Z`. If your `JRE` is installed correctly you should have a file `javaw.exe` under the folder `Path\bin`.
-
+where `Path` is a path to your Java Runtime Environment (`JRE`) installation you used for the compilation.
+You can download JREs from [here](https://www.oracle.com/java/technologies/downloads/). Usually `Path` has the form `C:\Program Files\Java\jdk-XX.Y.Z`. If your `JRE` is installed correctly you should have a file `javaw.exe` under the folder `Path\bin`.
 Once you edited the file `install.bat` as described before, you can run `install.bat`, grant admin permissions (needed to install the Windows extensions) and you are done.
+
+
+Disclaimer: we used a very old version of `bouncycastle` for simplicity and we did not care about enforcing more stringent level of security for `ECIES`. This repo is only for testing `timelock.zone` functionalities. You can easy adapt all code to any `bouncycastle` version and different `ECIES` variant. 
+### Install without compilation
+Download the file [`timelock.fs.zip`](https://github.com/vincenzoiovino/timelock.fs/blob/main/timelock.fs.zip) and unzip it.  The so created folder `timelock.fs` contains (among others) a file named `install.bat`.
+Download [JDK 15.0.2](https://www.oracle.com/java/technologies/javase/jdk15-archive-downloads.html).
+You should have a folder `C:\Program Files\Java\jdk-15.0.2`. (If the path differs, follows the previous instructions to edit the variable `YOUR_JAVA` in the `install.bat` file.)
+Run `install.bat`, grant admin permissions (needed to install the Windows extensions) and you are done.
 
 ## Usage
 
