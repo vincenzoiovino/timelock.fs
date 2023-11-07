@@ -11,7 +11,7 @@ Disclaimer: we used a very old version of `bouncycastle` for simplicity and we d
 ### Install without compilation
 
 #### Automatic installation
-Just run 'setup.bat', grant admin permissions (needed to install the Windows extensions) and you are done.
+Just run `setup.bat`, grant admin permissions (needed to install the Windows extensions) and you are done.
 
 #### Manual installation
 If the previous installation does not work, you should do the following manual installation.
