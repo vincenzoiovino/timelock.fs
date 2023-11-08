@@ -13,12 +13,12 @@ setx YOUR_JAVA "C:\Program Files\Java\jdk-15.0.2"
 reg ADD "HKEY_CLASSES_ROOT\*\shell\timelock.fs.encrypt"  /f
 reg ADD "HKEY_CLASSES_ROOT\*\shell\timelock.fs.encrypt" /f /t REG_SZ /d "timelock.fs.encrypt"
 reg ADD "HKEY_CLASSES_ROOT\*\shell\timelock.fs.encrypt\command" /f
-reg ADD "HKEY_CLASSES_ROOT\*\shell\timelock.fs.encrypt\command" /f /ve /d "%YOUR_JAVA%\bin\javaw.exe -D\"javax.net.ssl.trustStoreType\"=\"Windows-ROOT\" -jar %~dp0timelock.fs.jar encrypt \"%%1\""
+reg ADD "HKEY_CLASSES_ROOT\*\shell\timelock.fs.encrypt\command" /f /ve /d "%YOUR_JAVA%\bin\javaw.exe -D\"javax.net.ssl.trustStoreType\"=\"Windows-ROOT\" -jar \"%~dp0timelock.fs.jar\" encrypt \"%%1\""
 
 reg ADD "HKEY_CLASSES_ROOT\.tlcs\shell\timelock.fs.decrypt"  /f
 reg ADD "HKEY_CLASSES_ROOT\.tlcs\shell\timelock.fs.decrypt" /f /t REG_SZ /d "timelock.fs.decrypt"
 reg ADD "HKEY_CLASSES_ROOT\.tlcs\shell\timelock.fs.decrypt\command" /f
-reg ADD "HKEY_CLASSES_ROOT\.tlcs\shell\timelock.fs.decrypt\command" /f /ve /d "%YOUR_JAVA%\bin\javaw.exe -D\"javax.net.ssl.trustStoreType\"=\"Windows-ROOT\" -jar %~dp0timelock.fs.jar decrypt \"%%1\""
+reg ADD "HKEY_CLASSES_ROOT\.tlcs\shell\timelock.fs.decrypt\command" /f /ve /d "%YOUR_JAVA%\bin\javaw.exe -D\"javax.net.ssl.trustStoreType\"=\"Windows-ROOT\" -jar \"%~dp0timelock.fs.jar\" decrypt \"%%1\""
 
 echo ---------------------------------------------------------------------------------------------
 echo Installation terminated. 
