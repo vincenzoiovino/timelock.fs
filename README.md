@@ -44,6 +44,7 @@ To uninstall the `timelock.fs` extensions, run [`uninstall.bat`](https://github.
 
 ## Screenshots
 (The following screenshots refer to an older version.)
+
 <img src="screenshottlockfs1.jpg" width="30%" height="30%" />
 <br>
 <img src="screenshottlockfs2.jpg" width="30%" height="30%" />
