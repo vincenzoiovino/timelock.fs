@@ -1,6 +1,8 @@
 # timelock.fs
 `timelock.fs` is an extension for the [timelock.zone](https://www.timelock.zone) service that enables to encrypt to the future and decrypts any file using Windows Explorer.
 See also [tlcs-c](https://github.com/aragonzkresearch/tlcs-c/), [tlcs-rust](https://github.com/aragonzkresearch/tlcs-rust/), [Timelock.zone.AndroidExample](https://github.com/vincenzoiovino/Timelock.zone.AndroidExample) and [TLCS Usage](https://github.com/aragonzkresearch/tlcs-c/blob/main/examples/howtoencrypt.md).
+
+Disclaimer: currently we used a very old version of `bouncycastle` for simplicity and we did not care about enforcing more stringent level of security for `ECIES`. This repo is only for testing `timelock.zone` functionalities. You can easy adapt all code to any `bouncycastle` version and different `ECIES` variant. 
 ## Installation
 ### Install from source
 Add as dependencies ``bcprov-jdk15on-168.jar``, ``json-simple-1.1.jar`` and [``timelock.zone.jar``](https://github.com/vincenzoiovino/TimelockJavaAPI/tree/main).
@@ -16,9 +18,6 @@ setx YOUR_JAVA "Path"
 where `Path` is a path to your Java Runtime Environment (`JRE`) installation you used for the compilation.
 You can download JREs from [here](https://www.oracle.com/java/technologies/downloads/). Usually `Path` has the form `C:\Program Files\Java\jdk-XX.Y.Z`. If your `JRE` is installed correctly you should have a file `javaw.exe` under the folder `Path\bin`.
 Once you edited the file `install.bat` as described before, you can run `install.bat`, grant admin permissions (needed to install the Windows extensions) and you are done.
-
-
-Disclaimer: we used a very old version of `bouncycastle` for simplicity and we did not care about enforcing more stringent level of security for `ECIES`. This repo is only for testing `timelock.zone` functionalities. You can easy adapt all code to any `bouncycastle` version and different `ECIES` variant. 
 
 ### Install without compilation
 Download the file [`timelock.fs.zip`](https://github.com/vincenzoiovino/timelock.fs/blob/main/timelock.fs.zip) and unzip it.  The so created folder `timelock.fs` contains (among others) a file named `install.bat`.
