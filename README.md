@@ -21,7 +21,7 @@ Once you edited the file `install.bat` as described before, you can run `install
 
 ### Install without compilation
 Download the file [`timelock.fs.zip`](https://github.com/vincenzoiovino/timelock.fs/blob/main/timelock.fs.zip) and unzip it.  The so created folder `timelock.fs` contains (among others) a file named `install.bat`.
-Download [JDK 17](https://jdk.java.net/archive/) or higher if you do not have `JDK`/`JRE` installed.
+Download [JDK 17](https://jdk.java.net/archive/) or higher if you do not have already `JDK`/`JRE` installed.
 Run `install.bat`, grant admin permissions (needed to install the Windows extensions) and you are done.
 
 #### Installation issues
